@@ -48,7 +48,7 @@ app.post('/api/citas', (req, res) => {
 app.get('/api/citas/disponibilidad', (req, res) => {
   const { fecha, hora } = req.query;
 
-  const query = 'SELECT * FROM citas';
+  const query = 'SELECT * FROM citas WHERE fecha = $1 AND hora = $2';
   const values = [fecha, hora];
 
   pool.query(query, values, (err, result) => {
@@ -65,7 +65,6 @@ app.get('/api/citas/disponibilidad', (req, res) => {
     } else {
       // No hay citas disponibles
       res.status(200).json({ disponible: false });
-      res.status(200).json(result.rows);
     }
   });
 });
