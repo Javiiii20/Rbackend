@@ -65,6 +65,7 @@ app.get('/api/citas/disponibilidad', (req, res) => {
     } else {
       // No hay citas disponibles
       res.status(200).json({ disponible: false });
+      res.status(200).json(result.rows);
     }
   });
 });
